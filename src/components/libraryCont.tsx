@@ -10,7 +10,7 @@ type LibraryContextType = {
 const LibraryContext = createContext<LibraryContextType | undefined>(undefined);
 
 export const LibraryProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [myLibrary, setMyLibrary] = useState<Book[]>(initialBooks);
+  const [myLibrary, setMyLibrary] = useState<Book[]>([]);
 
   return (
     <LibraryContext.Provider value={{ myLibrary, setMyLibrary }}>
