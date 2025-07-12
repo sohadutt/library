@@ -28,7 +28,7 @@ function CollapsingSearchBar() {
     <div ref={wrapperRef} className={`search-bar ${expanded ? "expanded" : ""}`}>
       {!expanded && (
         <button className="search-button" onClick={() => setExpanded(true)}>
-          🔍
+          <span className="material-symbols-outlined">search</span>
         </button>
       )}
       {expanded && (
