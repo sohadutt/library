@@ -5,6 +5,8 @@ import BookList from './components/BookList';
 import BookFormModal from './components/BookFormModal';
 import EditBookActionsModal from './components/EditBookActionModal';
 import initialBooks from './data/books.json'; 
+import CollapsingSearchBar from './components/SearchBar';
+import "tailwindcss";
 
 const App: React.FC = () => {
   const [myLibrary, setMyLibrary] = useState<Book[]>([]); 
@@ -106,8 +108,8 @@ useEffect(() => {
         <div className="container">
           <div className="header">
             <h1 className="logo">Reading List</h1>
+            <CollapsingSearchBar/>
             <div className="head-btn">
-              <input id='search' className="search" type="text" placeholder="Search books..." />
               <button className="add-book" onClick={() => { setIsFormModalOpen(true); setEditingBook(null); }}>
                 Add Book
               </button>

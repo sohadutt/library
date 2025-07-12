@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect } from "react";
-import { Search } from "lucide-react";
+import "./SearchBar.css"; // We'll write this next
 
 function CollapsingSearchBar() {
   const [expanded, setExpanded] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const wrapperRef = useRef(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+    function handleClickOutside(event: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
         setExpanded(false);
       }
     }
@@ -17,25 +18,25 @@ function CollapsingSearchBar() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (expanded && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [expanded]);
+
   return (
-    <div
-      ref={wrapperRef}
-      className={`flex items-center gap-2 transition-all duration-300 ${
-        expanded ? "bg-gray-100 px-3 py-1 rounded-full" : ""
-      }`}
-    >
-      <button
-        onClick={() => setExpanded(true)}
-        className="p-2 text-gray-600 hover:text-black"
-      >
-        <Search size={20} />
-      </button>
+    <div ref={wrapperRef} className={`search-bar ${expanded ? "expanded" : ""}`}>
+      {!expanded && (
+        <button className="search-button" onClick={() => setExpanded(true)}>
+          🔍
+        </button>
+      )}
       {expanded && (
         <input
+          ref={inputRef}
           type="text"
-          className="outline-none bg-transparent w-40"
+          className="search-input"
           placeholder="Search books..."
-          autoFocus
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
