@@ -3,7 +3,8 @@ import myLibrary from "../App"
 
 const search = document.getElementById('.search');
 
-const searchitem = search ? search.value.toLowerCase() : "";
+const searchInput = search as HTMLInputElement;
+const searchitem = searchInput ? searchInput.value.toLowerCase() : "";
 
 
 
