@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
 import type { Book } from "../types";
-import initialBooks from "../data/books.json";
 
 type LibraryContextType = {
   myLibrary: Book[];
