@@ -6,10 +6,11 @@ import BookFormModal from './components/BookFormModal';
 import EditBookActionsModal from './components/EditBookActionModal';
 import initialBooks from './data/books.json'; 
 import CollapsingSearchBar from './components/SearchBar';
+import { useLibrary } from './components/libraryCont';
 import "tailwindcss";
 
 const App: React.FC = () => {
-  const [myLibrary, setMyLibrary] = useState<Book[]>([]); 
+  const { myLibrary, setMyLibrary } = useLibrary();
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
   const [isEditActionsModalOpen, setIsEditActionsModalOpen] = useState(false);
   const [editingBook, setEditingBook] = useState<Book | null>(null);
