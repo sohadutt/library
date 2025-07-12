@@ -25,6 +25,7 @@
   padding: 6px 10px;
   transition: all 0.3s ease;
   width: fit-content;
+  margin-left: auto;
 }
 
 .search-bar.expanded {
