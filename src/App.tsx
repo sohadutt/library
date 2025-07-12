@@ -1,4 +1,3 @@
-// src/App.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import type { Book } from './types';
 import { useDarkMode } from './helper/useDarkMode';
@@ -108,6 +107,7 @@ useEffect(() => {
           <div className="header">
             <h1 className="logo">Reading List</h1>
             <div className="head-btn">
+              <input id='search' className="search" type="text" placeholder="Search books..." />
               <button className="add-book" onClick={() => { setIsFormModalOpen(true); setEditingBook(null); }}>
                 Add Book
               </button>
