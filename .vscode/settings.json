@@ -3,5 +3,8 @@
         "darkmode",
         "handleclear",
         "searchitem"
+    ],
+    "cSpell.ignoreWords": [
+        "searchresult"
     ]
 }

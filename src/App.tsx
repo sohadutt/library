@@ -7,7 +7,6 @@ import EditBookActionsModal from './components/EditBookActionModal';
 import initialBooks from './data/books.json'; 
 import CollapsingSearchBar from './components/SearchBar';
 import { useLibrary } from './components/libraryCont';
-import "tailwindcss";
 
 const App: React.FC = () => {
   const { myLibrary, setMyLibrary } = useLibrary();
@@ -16,6 +15,8 @@ const App: React.FC = () => {
   const [editingBook, setEditingBook] = useState<Book | null>(null);
   const [selectedBookForActions, setSelectedBookForActions] = useState<Book | null>(null);
   const [, toggleDarkMode] = useDarkMode(); 
+  const [searchResult, setSearchResult] = useState<Book[] | null>(null);
+
 
   const unreadBooks = myLibrary.filter(book => !book.completed);
   const readBooks = myLibrary.filter(book => book.completed);
@@ -29,6 +30,12 @@ const App: React.FC = () => {
       setMyLibrary(prevLibrary => [...prevLibrary, book]);
     }
   };
+
+  const search = useCallback(() => {
+    setMyLibrary(searchResult)
+  })
+
+
 
   const loadBooksFromJson = useCallback(() => {
     setMyLibrary(initialBooks);
@@ -109,7 +116,9 @@ useEffect(() => {
         <div className="container">
           <div className="header">
             <h1 className="logo">Reading List</h1>
-            <CollapsingSearchBar/>
+            <CollapsingSearchBar setSearchResult={function (value: React.SetStateAction<Book[] | null>): void {
+              throw new Error('Function not implemented.');
+            } }/>
             <div className="head-btn">
               <button className="add-book" onClick={() => { setIsFormModalOpen(true); setEditingBook(null); }}>
                 Add Book
