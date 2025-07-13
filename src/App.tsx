@@ -32,15 +32,6 @@ const App: React.FC = () => {
     }
   };
 
- // useEffect(() => {
- // if (searchResult) {
- //   setMyLibrary(searchResult);
-//    setSearchResult(null);
-// }
-// }, [searchResult, setMyLibrary])
-
-
-
   const loadBooksFromJson = useCallback(() => {
     setMyLibrary(initialBooks);
     if (myLibrary.length === initialBooks.length) {
