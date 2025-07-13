@@ -18,8 +18,9 @@ const App: React.FC = () => {
   const [searchResult, setSearchResult] = useState<Book[] | null>(null);
 
 
-  const unreadBooks = myLibrary.filter(book => !book.completed);
-  const readBooks = myLibrary.filter(book => book.completed);
+  const displayBooks = searchResult ?? myLibrary;
+  const unreadBooks = displayBooks.filter(book => !book.completed);
+  const readBooks = displayBooks.filter(book => book.completed);
 
   const handleAddBook = (book: Book, isEdit: boolean) => {
     if (isEdit) {
@@ -31,9 +32,12 @@ const App: React.FC = () => {
     }
   };
 
-  const search = useCallback(() => {
-    setMyLibrary(searchResult)
-  })
+ // useEffect(() => {
+ // if (searchResult) {
+ //   setMyLibrary(searchResult);
+//    setSearchResult(null);
+// }
+// }, [searchResult, setMyLibrary])
 
 
 
@@ -116,9 +120,7 @@ useEffect(() => {
         <div className="container">
           <div className="header">
             <h1 className="logo">Reading List</h1>
-            <CollapsingSearchBar setSearchResult={function (value: React.SetStateAction<Book[] | null>): void {
-              throw new Error('Function not implemented.');
-            } }/>
+            <CollapsingSearchBar setSearchResult={setSearchResult} />
             <div className="head-btn">
               <button className="add-book" onClick={() => { setIsFormModalOpen(true); setEditingBook(null); }}>
                 Add Book
