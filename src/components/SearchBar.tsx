@@ -37,22 +37,26 @@ function CollapsingSearchBar({ setSearchResult }: CollapsingSearchBarProps) {
   }, [expanded]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value.toLowerCase().trim();
-    setSearchTerm(input);
+  const input = e.target.value.toLowerCase().trim();
+  setSearchTerm(input);
 
-    if (input === "") {
-      setSearchResult(null);
-      return null;
-    }
+  if (input === "") {
+    setSearchResult(null);
+    return;
+  }
 
-    const filtered = myLibrary.filter((book: Book) =>
-      book.title.toLowerCase().includes(input) ||
-      book.author.toLowerCase().includes(input) ||
-      book.year.toString().includes(input)
-    );
+  const terms = input.split(" ");
 
-    setSearchResult(filtered);
-  };
+  const filtered = myLibrary.filter((book: Book) =>
+    terms.every((term) =>
+      book.title.toLowerCase().includes(term) ||
+      book.author.toLowerCase().includes(term) ||
+      book.year.toString().includes(term)
+    )
+  );
+
+  setSearchResult(filtered);
+};
 
   
   return (
@@ -65,12 +69,12 @@ function CollapsingSearchBar({ setSearchResult }: CollapsingSearchBarProps) {
       )}
       {expanded && (
         <input
-          ref={inputRef}
-          type="text"
-          className="search-input"
-          placeholder="Search books..."
-          value={searchTerm}
-          onChange={handleSearch}
+           ref={inputRef}
+           type="search"
+           className="search-input"
+           placeholder="Search books..."
+           value={searchTerm}
+              onChange={handleSearch}
         />
       )}
     </div>
